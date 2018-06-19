@@ -1,0 +1,50 @@
+body {
+  background-color: #171713;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#field {
+  margin-top: 150px;
+}
+
+
+#field {
+  font-size: 100px;
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+  grid-template-rows: repeat(3, 150px);
+  justify-content: center;
+  color: #EAEAEA;
+}
+
+.cell {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.cell:hover {
+  cursor: pointer;
+}
+
+
+field-cell:nth-child(3n+1) {
+  border-right: 4px solid #DA735B;
+}
+
+field-cell:nth-child(3n+2) {
+  border-right: 4px solid #DA735B;
+}
+
+field-cell:nth-child(-n+6) {
+  border-bottom: 4px solid #DA735B;
+}
+
+#activePlayer {
+  color: #DA735B;
+  text-align: center;
+  font-size: 75px;
+}
+
