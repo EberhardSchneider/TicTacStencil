@@ -94,41 +94,6 @@ declare global {
   }
 }
 
-
-declare global {
-
-  namespace StencilComponents {
-    interface TicTac {
-      'field': Array<number>;
-      'player': number;
-    }
-  }
-
-  interface HTMLTicTacElement extends StencilComponents.TicTac, HTMLStencilElement {}
-
-  var HTMLTicTacElement: {
-    prototype: HTMLTicTacElement;
-    new (): HTMLTicTacElement;
-  };
-  interface HTMLElementTagNameMap {
-    'tic-tac': HTMLTicTacElement;
-  }
-  interface ElementTagNameMap {
-    'tic-tac': HTMLTicTacElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'tic-tac': JSXElements.TicTacAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface TicTacAttributes extends HTMLAttributes {
-      'field'?: Array<number>;
-      'player'?: number;
-    }
-  }
-}
-
 declare global { namespace JSX { interface StencilJSX {} } }
 
 export declare function defineCustomElements(window: any): void;

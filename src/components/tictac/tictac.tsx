@@ -1,4 +1,4 @@
-import { Component, Listen, Prop } from '@stencil/core';
+import { Component, Listen, State } from '@stencil/core';
 
 
 @Component({
@@ -7,8 +7,9 @@ import { Component, Listen, Prop } from '@stencil/core';
 })
 export class Tictac {
 
-  @Prop({ mutable: true }) field: Array<number>;
-  @Prop({ mutable: true} ) player: number;
+  @State() field: Array<number>;
+  @State() player: number;
+  @State() isGameOn: boolean;
 
   constructor() {
     this.field = [
@@ -16,20 +17,23 @@ export class Tictac {
       0, 0, 0,
       0, 0, 0
     ];
-
+  
     this.player = 1;
+  
+    this.isGameOn = false;
   }
 
   @Listen('cellClicked')
   handleClick( event ) {
-    console.log("Player: " + this.player );
+    if (!this.isGameOn) return;
     const index: number = event.detail;
+    if (this.field[index] != 0) return;
     this.field[index] = this.player;
     this.field = [ ...this.field ];
 
     const winner: number = getWinningPlayer(this.field);
     if (winner != 0) {
-      alert('Winner: ' + winner);
+      this.isGameOn = false;
     }
     this.player = 3- this.player;
   }
@@ -43,9 +47,25 @@ export class Tictac {
         <div id="field">
           {this.field.map((e, index) => ( <field-cell value={e} index={index}></field-cell> ) )}
         </div>
+    {   this.isGameOn 
+          ? <div id="startButton">Game is on!</div> 
+          : <div id="startButton" onClick={() => { this.startGame() }}>
+                        START
+            </div> }
       </div>
-      
     );
+  }
+
+  startGame() {
+    this.field = [
+      0, 0, 0,
+      0, 0, 0,
+      0, 0, 0
+    ];
+  
+    this.player = 1;
+  
+    this.isGameOn = true;
   }
 }
 
@@ -74,3 +94,4 @@ const getWinningPlayer = function(field): number {
   });
   return winner;
 }
+
